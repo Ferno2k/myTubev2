@@ -10,10 +10,10 @@ import {
 } from "./components";
 
 const App = () => {
-  const [selectedCategory, setSelectedCategory] = useState("New");
+  const [selectedCategory, setSelectedCategory] = useState("Home");
   return (
     <BrowserRouter>
-      <div className="bg-black">
+      <div className="min-w-[360px] overflow-scroll bg-black">
         <Navbar
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
