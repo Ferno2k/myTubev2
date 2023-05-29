@@ -12,19 +12,25 @@ const Videos = ({ videos, direction }) => {
       }}
     >
       {videos.map((item, idx) => {
-        if (item.id.videoId || item.id.channelId) {
+        if (item?.video?.videoId || item?.channel?.channelId) {
           if (direction) {
             return (
               <div className="p-2" key={idx}>
-                {item.id.videoId && <VideoCardHorizontal video={item} />}
-                {item.id.channelId && <ChannelCard channelDetail={item} />}
+                {item?.type === "video" ? (
+                  <VideoCardHorizontal video={item?.video} />
+                ) : (
+                  <ChannelCard channelDetail={item?.channel} />
+                )}
               </div>
             );
           }
           return (
-            <div className="p-4" key={idx}>
-              {item.id.videoId && <VideoCard video={item} />}
-              {item.id.channelId && <ChannelCard channelDetail={item} />}
+            <div className="pb-2 xs:p-4" key={idx}>
+              {item?.type === "video" ? (
+                <VideoCard video={item?.video} />
+              ) : (
+                <ChannelCard channelDetail={item?.channel} />
+              )}
             </div>
           );
         }

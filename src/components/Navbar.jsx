@@ -12,14 +12,14 @@ const Navbar = ({ selectedCategory, setSelectedCategory }) => {
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
-        <Link to="/">
+        <Link to="/" onClick={() => setSelectedCategory("Home")}>
           <img
             src={logo}
             alt="logo"
             className="h-10 w-10 max-w-fit xs:h-12  xs:w-12"
           />
         </Link>
-        <p className=" text-xl font-bold text-white xs:text-3xl ">MyTube</p>
+        <p className=" text-2xl font-bold text-white xs:text-3xl ">MyTube</p>
       </div>
       <div className=" w-full max-w-md xs:w-[30%]">
         <SearchBar />

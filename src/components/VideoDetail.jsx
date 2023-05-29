@@ -13,20 +13,22 @@ const VideoDetail = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetchFromAPI(`videos?part=snippet,statistics&id=${id}`).then((data) =>
-      setVideoDetail(data.items[0])
+    fetchFromAPI(`video/details/?id=${id}`).then((data) =>
+      setVideoDetail(data)
     );
 
-    fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
-      (data) => setVideos(data.items)
-    );
+    fetchFromAPI(`video/related-contents/?id=${id}`).then((data) => {
+      console.log(data);
+      setVideos(data.contents);
+    });
   }, [id]);
 
-  if (!VideoDetail?.snippet) return "Loading...";
+  if (!VideoDetail) return "Loading...";
 
   const {
-    snippet: { title, channelId, channelTitle },
-    statistics: { viewCount, likeCount },
+    title,
+    author: { channelId, title: channelTitle },
+    stats: { views, likes },
   } = VideoDetail;
 
   return (
@@ -53,16 +55,16 @@ const VideoDetail = () => {
               </Link>
               <div className="flex flex-row gap-5 text-center">
                 <p className="text-sm font-normal opacity-70">
-                  {parseInt(viewCount).toLocaleString()} views
+                  {parseInt(views).toLocaleString()} views
                 </p>
                 <p className="text-sm font-normal opacity-70">
-                  {parseInt(likeCount).toLocaleString()} likes
+                  {parseInt(likes).toLocaleString()} likes
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div className=" py-5 sm:py-2 ">
+        <div className=" py-5 sm:py-0 ">
           <Videos videos={videos} direction="column" />
         </div>
       </div>
