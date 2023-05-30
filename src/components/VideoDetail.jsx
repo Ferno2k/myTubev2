@@ -18,7 +18,6 @@ const VideoDetail = () => {
     );
 
     fetchFromAPI(`video/related-contents/?id=${id}`).then((data) => {
-      console.log(data);
       setVideos(data.contents);
     });
   }, [id]);

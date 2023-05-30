@@ -23,17 +23,20 @@ const VideoCardHorizontal = ({ video }) => {
           />
         </div>
       </Link>
-      <div className=" w-full min-w-0">
-        <div className="box-border flex w-full min-w-0 flex-col sm:pr-6 ">
+      <div>
+        <div className="box-border flex flex-col sm:pr-6 ">
           <Link
             to={video?.videoId ? `/video/${video?.videoId}` : demoChannelUrl}
           >
-            <h6 className="mb-1 text-sm font-medium text-white">
-              {video?.title
-                ? video?.title.length > 58
-                  ? video?.title.slice(0, 57) + "..."
-                  : video?.title
-                : demoVideoTitle.slice(0, 57)}
+            <h6
+              className="mb-1 max-h-16 overflow-hidden text-ellipsis whitespace-normal text-sm font-medium text-white"
+              style={{
+                WebkitLineClamp: 2,
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {video?.title || demoVideoTitle}
             </h6>
           </Link>
           <Link
@@ -79,9 +82,7 @@ const VideoCardHorizontal = ({ video }) => {
                   <Sensors
                     style={{ fontSize: "medium", verticalAlign: "middle" }}
                   />
-                  <span className=" pl-1 align-middle font-medium">
-                    {video?.badges?.[0]}
-                  </span>
+                  <span className=" pl-1 align-middle font-medium">LIVE</span>
                 </div>
               </div>
             )}
