@@ -41,12 +41,15 @@ const VideoCard = ({ video }) => {
           <Link
             to={video?.videoId ? `/video/${video?.videoId}` : demoChannelUrl}
           >
-            <p className="mb-1 mt-3 font-medium leading-[1.375rem] text-white">
-              {video?.title
-                ? video?.title.length > 63
-                  ? video?.title.slice(0, 62) + "..."
-                  : video?.title
-                : demoVideoTitle.slice(0, 62)}
+            <p
+              className="mb-1 mt-3 max-h-[4.4rem] overflow-hidden text-ellipsis whitespace-normal font-medium leading-[1.375rem] text-white"
+              style={{
+                WebkitLineClamp: 2,
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {video?.title || demoVideoTitle}
             </p>
           </Link>
           <Link
@@ -92,9 +95,7 @@ const VideoCard = ({ video }) => {
                   <Sensors
                     style={{ fontSize: "medium", verticalAlign: "middle" }}
                   />
-                  <span className=" pl-1 align-middle font-medium">
-                    {video?.badges?.[0]}
-                  </span>
+                  <span className=" pl-1 align-middle font-medium">LIVE</span>
                 </div>
               </div>
             )}
